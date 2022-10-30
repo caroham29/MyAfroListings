@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import AboutUs from "../../components/about/about.tsx";
+import AboutUs from "../../components/about/about";
 
 const Index = () => (
   <>
