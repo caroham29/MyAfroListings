@@ -1,0 +1,59 @@
+.homepageContainer {
+  /* Telling our absolute positioned video to 
+  be relative to this element */
+  position: absolute;
+  top:0;
+
+  width: 100vw;
+  height: 100vh;
+
+  /* Will not allow the video to overflow the 
+  container */
+  overflow: hidden;
+
+  /* Centering the container's content vertically 
+  and horizontally */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;	
+}
+
+.homepageContainer video {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.homepageOverlay {
+	position: absolute;
+	top:0;
+	z-index: 2;
+	background-color: rgba(0,0,0,.5);
+	height:100%;
+	width: 100%;
+	color:white;
+	padding-top: 200px;
+}
+
+.searchContainer {
+	background-color: rgba(0,0,0,.5);
+	display: inline-flex;
+  	align-items: flex-start;
+  	max-width: 95%;
+  	line-height: 100%;
+  	border-radius: 6px;
+}
+ 
+.searchContainer button {
+  background-color: #EC7211;
+}
+
+
+.btn:hover, .btn:active, .btn:visited {
+    background-color: #d4660f !important;
+}
