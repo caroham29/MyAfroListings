@@ -1,0 +1,38 @@
+.headerContainer {
+	height:70px;
+	background-color: rgba(0,0,0, .1);
+	color:white;
+	position: relative;
+	z-index: 3;
+	line-height: 70px;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 200px;
+}
+
+.leftContainer {
+	width:200px;
+}
+.rightContainer {
+	display: flex;
+	align-items: flex-end;
+}
+
+.rightItem {
+	margin:0 20px;
+	cursor: pointer;
+}
+
+.rightItem:hover {
+	color:#F3AA70 !important;
+}
+.rightItem:hover .toggle {
+	color:#F3AA70 !important;
+}
+
+.toggle {
+
+	padding-left: 7px;
+	color:white;
+}
+
