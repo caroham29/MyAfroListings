@@ -21,7 +21,13 @@ const Header = () => {
 				<div onClick={() => aboutUs()} className={styles.rightItem}>About Us
 					
 				</div>
-				<div className={styles.rightItem}>Businesses
+				<div className={styles.rightItem}>Business
+					<a className={`${styles.toggle} dropdown-toggle`} href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+				</div>
+				<div className={styles.rightItem}>Education
+					<a className={`${styles.toggle} dropdown-toggle`} href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+				</div>
+				<div className={styles.rightItem}>Housing
 					<a className={`${styles.toggle} dropdown-toggle`} href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
 				</div>
 				<div className={styles.rightItem}>Travel

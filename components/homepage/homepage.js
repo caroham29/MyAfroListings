@@ -12,7 +12,7 @@ const Homepage = () => {
 	<div className={styles.homepageContainer}>
 		<div className={styles.homepageOverlay}>
 			<div>
-				<h1>Afro Business, Afro Vacations, Afro Community</h1>
+				<h1>Afro Business, Afro Education, Afro Community</h1>
 				<div className="m-3">Highest Rated Afro Business Services Directory Worldwide, The Best Afro Travel, Afro Education Directory</div>
 				<div className={`${styles.searchContainer} p-3 mt-3 form-inline`}>
 					<div className="form-group m-2">
@@ -26,7 +26,7 @@ const Homepage = () => {
 			</div>
 		</div>
 		<video autoPlay muted loop id="myVideo">
-		    <source src="https://josephfarmsmedia.s3.us-west-1.amazonaws.com/FP011655MD01.mp4" type="video/mp4"></source>
+		    <source src="https://josephfarmsmedia.s3.us-west-1.amazonaws.com/Sequence+01_11.mp4" type="video/mp4"></source>
 		</video>
 	</div>
 	)
