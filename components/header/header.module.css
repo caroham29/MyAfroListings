@@ -1,13 +1,15 @@
 .headerContainer {
-	height:70px;
+	height:35px;
 	background-color: rgba(0,0,0, .1);
 	color:white;
-	position: relative;
+	position: absolute;
 	z-index: 3;
-	line-height: 70px;
+	line-height: 35px;
 	display: flex;
 	justify-content: space-between;
 	padding: 0 125px;
+	top:0;
+	width:100%;
 }
 
 .leftContainer {
@@ -20,19 +22,44 @@
 
 .rightItem {
 	margin:0 20px;
+	height:100%;
 	cursor: pointer;
+	position: relative;
 }
 
 .rightItem:hover {
-	color:#F3AA70 !important;
+	text-decoration: underline;
 }
 .rightItem:hover .toggle {
 	color:#F3AA70 !important;
 }
 
 .toggle {
-
 	padding-left: 7px;
 	color:white;
+}
+
+.hoverOptionsContainer {
+	position: absolute;
+	top:0;
+	right:0;
+	margin-top: 35px;
+	display: block;
+	line-height: 36px;
+	width: 220px;
+	background-color: white;
+	border-radius: 3px;
+}
+
+.hoverOptionsContainer div {
+	cursor: pointer;
+	color:black;
+	line-height: 36px;
+	padding:3px 20px;
+}
+
+.hoverOptionsContainer div:hover {
+	background-color: #F2F2F2;
+	border-radius: inherit;
 }
 

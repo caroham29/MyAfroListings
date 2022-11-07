@@ -11,8 +11,8 @@ const Layout = () => {
 
 	return (
 		<div >
-			<Header></Header>
 			<HomePage></HomePage>
+			<Header></Header>
 		</div>
 	)
 }
