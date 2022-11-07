@@ -5,6 +5,7 @@ import styles from "./header.module.css";
 
 const Header = () => {
 	const router = useRouter();
+	const [hoverItem, setHoverItem] = useState(null);
 	useEffect(() => {
 		
 	}, [])
@@ -18,23 +19,39 @@ const Header = () => {
 		<div className={`${styles.headerContainer}`}>
 			<div className={styles.leftContainer}></div>
 			<div className={styles.rightContainer}>
-				<div onClick={() => aboutUs()} className={styles.rightItem}>About Us
+				<div onClick={() => aboutUs()} className={styles.rightItem}>Home
 					
 				</div>
-				<div className={styles.rightItem}>Business
-					<a className={`${styles.toggle} dropdown-toggle`} href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+				<div className={styles.rightItem}>Business</div>
+				<div className={styles.rightItem} onMouseOver={() => setHoverItem('News')}  onMouseLeave={() => setHoverItem(null)}>
+					<div>News</div>
+					{hoverItem === "News" && (
+					<div className={styles.hoverOptionsContainer}>
+						<div>Properties for Rent</div>
+						<div>Properties for Sale</div>
+					</div>
+					)}
 				</div>
-				<div className={styles.rightItem}>Education
-					<a className={`${styles.toggle} dropdown-toggle`} href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+				<div className={styles.rightItem} onMouseOver={() => setHoverItem('Education')}  onMouseLeave={() => setHoverItem(null)}>
+					<div>Education</div>
+					{hoverItem === "Education" && (
+					<div className={styles.hoverOptionsContainer}>
+						<div>Properties for Rent</div>
+						<div>Properties for Sale</div>
+					</div>
+					)}
 				</div>
-				<div className={styles.rightItem}>Housing
-					<a className={`${styles.toggle} dropdown-toggle`} href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+				<div className={styles.rightItem}  onMouseOver={() => setHoverItem('Housing')}  onMouseLeave={() => setHoverItem(null)}>
+					<div>Housing</div>
+					{hoverItem === "Housing" && (
+					<div className={styles.hoverOptionsContainer}>
+						<div>Properties for Rent</div>
+						<div>Properties for Sale</div>
+					</div>
+					)}
 				</div>
-				<div className={styles.rightItem}>Travel
-					<a className={`${styles.toggle} dropdown-toggle`} href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-				</div>
-				<div className={styles.rightItem}>Join Now
-				</div>
+				<div className={styles.rightItem}>Travel</div>
+				<div className={styles.rightItem}>Join Now</div>
 			</div>
 		</div>
 	)
