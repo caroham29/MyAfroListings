@@ -10,7 +10,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 var pg =  require('pg');
 // pg.defaults.ssl = false;
-var connectionString = "pg://caroham29:Verin59!@database-1.cfrpea2gfrpi.us-west-1.rds.amazonaws.com:5432/database-1";
+var connectionString = "pg://postgres:Verizon59!@afro-listings-master.cfrpea2gfrpi.us-west-1.rds.amazonaws.com:5432";
 const client = new pg.Client(connectionString)
 
 client.connect(function (err) {
