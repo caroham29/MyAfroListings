@@ -9,15 +9,9 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 var pg =  require('pg');
-pg.defaults.ssl = false;
-var connectionString = "postgres://pmoore:Passw0rd@localhost:5432/afrolistings";
-const client = new pg.Client({
-  user: 'postgres',
-  host: 'afrolistings.cfrpea2gfrpi.us-west-1.rds.amazonaws.com',
-  database: 'afrolistings',
-  password: 'Verizon59!',
-  port: 5432,
-})
+// pg.defaults.ssl = false;
+var connectionString = "pg://postgres:Verizon59!@afro-listings-master.cfrpea2gfrpi.us-west-1.rds.amazonaws.com:5432";
+const client = new pg.Client(connectionString)
 
 client.connect(function (err) {
   if (err) console.log(err, " ...Error connecting to PSQL");
@@ -29,5 +23,11 @@ client.connect(function (err) {
         type varchar(50),\
         username varchar(100),\
         pw varchar(50),\
-        creationdate varchar(100))");
+        creationdate varchar(100))", (err, resp) => {
+          if (err) {
+            console.log(err," Error ")
+          } else {
+            console.log(resp, " SUCCESS ");
+          }
+        });
 });

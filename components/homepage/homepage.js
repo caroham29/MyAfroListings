@@ -2,20 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGeolocated } from "react-geolocated";
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 import styles from "./homepage.module.css";
 
 const Homepage = () => {
 	useEffect(() => {
 	}, [])
 
-    const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-        useGeolocated({
-            positionOptions: {
-                enableHighAccuracy: true,
-            },
-            userDecisionTimeout: 5000,
-        });
-    console.log(coords, isGeolocationEnabled, isGeolocationAvailable)
+	const responseGoogle = (response) => {
+	  console.log(response);
+	}
+    // const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    //     useGeolocated({
+    //         positionOptions: {
+    //             enableHighAccuracy: true,
+    //         },
+    //         userDecisionTimeout: 5000,
+    //     });
 
 	return (
 		<div className={styles.homepageContainerMain}>
