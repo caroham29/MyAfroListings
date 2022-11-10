@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Business = () => {
 	useEffect(() => {
-		console.log("Don't fix it... ");
 	}, [])
 	
 	const profile = () => {
