@@ -5,6 +5,19 @@
   height:100%;
   z-index: 1;
 }
+.mainSmText {
+  margin-top: 10px;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 18px;    
+  max-height: 140px;    
+  -webkit-line-clamp: 4; /* Write the number of 
+                            lines you want to be 
+                            displayed */
+  -webkit-box-orient: vertical;
+}
 .homepageContainer {
   position: relative;
   top:0;
@@ -27,9 +40,9 @@
   filter: brightness(90%);
 }
 .mainContainer {
-  padding:40px 50px;
+  padding:40px;
   width: 42%;
-  background-color: #efefef;
+  background-color:#F8F8F8;
   border-top-right-radius:6px;
   border-bottom-right-radius:6px;
 }
