@@ -17,7 +17,7 @@ const Business = () => {
 
 
 	return (
-		<div >
+		<div className={`my-5`}>
 			Business Listings...
 		</div>
 	)

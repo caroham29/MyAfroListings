@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGeolocated } from "react-geolocated";
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
+import Button from 'react-bootstrap/Button';
 import styles from "./homepage.module.css";
 
 const Homepage = () => {
 	useEffect(() => {
+			console.log("HERE YEE ")
 	}, [])
 
 	const responseGoogle = (response) => {
@@ -19,7 +21,7 @@ const Homepage = () => {
     //             enableHighAccuracy: true,
     //         },
     //         userDecisionTimeout: 5000,
-    //     });
+    //     })
 
 	return (
 		<div className={styles.homepageContainerMain}>
@@ -35,7 +37,12 @@ const Homepage = () => {
 							<div className="form-group m-2">
 								<input type="search" className="form-control" autoComplete="false" placeholder="Ex: zip code, city, state"/>
 							</div>
-							<button className={`${styles.btn} btn btn-primary m-2`}>Search</button>
+							<Button as="a"
+								className={`${styles.btn} m-2`}
+								variant="default">
+						   		Search
+						  	</Button>
+							
 						</div>
 					</div>
 				</div>
@@ -72,7 +79,7 @@ const Homepage = () => {
 					  	<div className={styles.smallContainerDiv}>The importance of advancing black home ownership</div>
 					  </div> 
 				</div>
-				<div className={styles.rightSide}>What now</div>
+				<div className={styles.rightSide}></div>
 			</div>
 	</div>
 	)

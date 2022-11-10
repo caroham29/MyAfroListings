@@ -75,7 +75,10 @@
   background-color: #EC7211;
 }
 
-
+.btn {
+  background-color:#F07616;
+  color:white;
+}
 .btn:hover, .btn:active, .btn:visited {
     background-color: #d4660f !important;
 }

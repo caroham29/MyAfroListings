@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/layout";
+import Homepage from "../components/homepage/homepage";
 
 const Index = () => (
   <>
-    <div>
-    	<Layout></Layout>
-   	</div>
+	<Layout></Layout>
+	<Homepage></Homepage>
   </>
 )
 export default Index
