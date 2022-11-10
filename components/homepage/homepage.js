@@ -9,6 +9,10 @@ import styles from "./homepage.module.css";
 
 const Homepage = () => {
 	useEffect(() => {
+		var item = document.getElementById('inputItemSearch');
+		setTimeout(() => {
+			item.focus();
+		}, 250);
 	}, [])
 
 	const responseGoogle = (response) => {
@@ -28,10 +32,10 @@ const Homepage = () => {
 				<div className={styles.homepageOverlay}>
 					<div>
 						<h1>Afro Business, Afro Education, Afro Community</h1>
-						<div className="m-3">Highest Rated Afro Business Services Directory Worldwide, The Best Afro Travel, Afro Education Directory</div>
+						<h5 className="m-3">Highest Rated Afro Business Services Directory Worldwide, The Best Afro Travel, Afro Education Directory</h5>
 						<div className={`${styles.searchContainer} p-3 mt-3 form-inline`}>
 							<div className="form-group m-2">
-								<input type="search" className="form-control" autoComplete="false" placeholder="Ex: business, service, food"/>
+								<input type="search" id="inputItemSearch" className="form-control" autoComplete="false" placeholder="Ex: business, service, food"/>
 							</div>
 							<div className="form-group m-2">
 								<input type="search" className="form-control" autoComplete="false" placeholder="Ex: zip code, city, state"/>
