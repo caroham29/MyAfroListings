@@ -10,8 +10,7 @@ const Layout = () => {
 	}, [])
 
 	return (
-		<div >
-			<HomePage></HomePage>
+		<div>
 			<Header></Header>
 		</div>
 	)

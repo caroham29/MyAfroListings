@@ -25,21 +25,12 @@ var allowCrossDomain = function(req, res, next) {
   req.method === "OPTIONS" ? res.sendStatus(200) : next();
 }
 
-
-
 app.prepare()
 .then(() => {
   const server = express()
   server.use(cors());
   server.use(express.json()); 
   server.use(allowCrossDomain);
-  // server.set('port', (4010));
-    
-  // serverTwo = https.createServer(
-  // {
-  //   key: fs.readFileSync('/../../../../etc/apache2/ssl/private/jgf_wildcard_2022_decrypted.key', 'utf8'),
-  //   cert: fs.readFileSync('/../../../../etc/apache2/ssl/ccc21481a20e9754.pem', 'utf8'),
-  // }, app);
 
   // Must be nextjs page...
   server.get('*', (req, res) => {
