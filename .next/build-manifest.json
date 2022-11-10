@@ -29,25 +29,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/business-listings": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/business-listings.js"
-    ],
-    "/education-listings": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/education-listings.js"
-    ],
     "/housing-listings": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/housing-listings.js"
     ],
-    "/news": [
+    "/next/dist/pages/_error": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/news.js"
+      "static/chunks/pages/next/dist/pages/_error.js"
     ],
     "/travel-listings": [
       "static/chunks/webpack.js",

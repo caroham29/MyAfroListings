@@ -2,10 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/education-listings": "pages/education-listings.js",
   "/housing-listings": "pages/housing-listings.js",
-  "/news": "pages/news.js",
-  "/business-listings": "pages/business-listings.js",
+  "/": "pages/index.js",
   "/travel-listings": "pages/travel-listings.js",
-  "/": "pages/index.js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
 }
