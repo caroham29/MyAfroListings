@@ -2,6 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/business-listings": "pages/business-listings.js"
+  "/education-listings": "pages/education-listings.js",
+  "/housing-listings": "pages/housing-listings.js",
+  "/news": "pages/news.js",
+  "/business-listings": "pages/business-listings.js",
+  "/travel-listings": "pages/travel-listings.js",
+  "/": "pages/index.js"
 }

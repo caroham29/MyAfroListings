@@ -9,7 +9,6 @@ import styles from "./homepage.module.css";
 
 const Homepage = () => {
 	useEffect(() => {
-			console.log("HERE YEE ")
 	}, [])
 
 	const responseGoogle = (response) => {
