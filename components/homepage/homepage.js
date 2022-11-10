@@ -9,10 +9,11 @@ import styles from "./homepage.module.css";
 
 const Homepage = () => {
 	useEffect(() => {
-		var item = document.getElementById('inputItemSearch');
-		setTimeout(() => {
-			item.focus();
-		}, 250);
+		// var item = document.getElementById('inputItemSearch');
+		// setTimeout(() => {
+		// 	item.focus();
+		// }, 250);
+		console.log(" Hello ")
 	}, [])
 
 	const responseGoogle = (response) => {
@@ -59,6 +60,7 @@ const Homepage = () => {
 					  	<img className={styles.img} src={"/tutor1.jpg"}/>
 					  	<div className={styles.mainContainer}>
 					  		<h3><a href='/hello' target="_blank">How one tutor has changed the lives of her students</a></h3>
+					  		<div className={styles.mainSmText}>Teachers often go above and beyond to make their students feel comfortable. One teacher matched a student's hairstyle when she saw she was uncomfortable. Another donated a kidney to her student.</div>
 					  	</div>
 					  </div>
 					  <div className={`${styles.item2} ${styles.smallContainer}`}>
