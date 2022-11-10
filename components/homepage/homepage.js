@@ -51,7 +51,7 @@ const Homepage = () => {
 					</div>
 				</div>
 				<video autoPlay muted loop id="myVideo">
-				    <source src="https://josephfarmsmedia.s3.us-west-1.amazonaws.com/Sequence+01_11.mp4" type="video/mp4"></source>
+				    <source src="https://josephfarmsmedia.s3.us-west-1.amazonaws.com/BGMovie.mp4" type="video/mp4"></source>
 				</video>
 			</div>
 			<div className={`d-inline-flex p-5 mx-3`}>
