@@ -5,6 +5,7 @@ import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import styles from "./login.module.css";
 import Button from 'react-bootstrap/Button';
 import { GrFormClose } from 'react-icons/gr';
+import jwt_decode from "jwt-decode";
 
 const Login = ({setShowLogin}) => {
 	const router = useRouter();
