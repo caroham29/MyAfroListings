@@ -84,23 +84,25 @@ const Login = ({setShowLogin}) => {
 					<h3 className={`mb-3`}>Sign Up</h3>
 					{ step === 1 && (
 					<>
-					  	<GoogleLogin
-					  		onSuccess={(resp) => inheritData(resp, setFieldValue)}
-					  		width='300'
-					  		text='continue_with'
-					  		shape='pill'
-					  		onError={() => {
-					    		console.log('Login Failed');
-					  		}}
-						/>
+						<div className={`my-5`}>
+						  	<GoogleLogin
+						  		onSuccess={(resp) => inheritData(resp, setFieldValue)}
+						  		width='300'
+						  		text='continue_with'
+						  		shape='pill'
+						  		onError={() => {
+						    		console.log('Login Failed');
+						  		}}
+							/>
+						</div>
 						<div className={styles.orContainer}>
 							<span className={styles.orContainerBorder}></span>
 							<span className={styles.orItem}>OR</span>
 							<span className={styles.orContainerBorder}></span>
 						</div>
 						<Button as="a"
-							className={styles.fullWidth}
-							variant="primary">
+							onClick={() => setStep(2)}
+							color="primary" variant="contained" fullWidth>
 					   		CONTINUE
 					  	</Button>
 				  	</>
