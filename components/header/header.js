@@ -30,7 +30,6 @@ const Header = () => {
 			  user: null,
 		})
 	}
-
 	return (
 		<>
 		{ showLogin && (

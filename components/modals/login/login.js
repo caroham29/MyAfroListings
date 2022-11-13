@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useRef } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> a7a811711e0bfa1953e859b862ad9a06a0b6cd16
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
@@ -29,13 +33,34 @@ const Login = ({setShowLogin}) => {
 		updateMethod('email', dataObj.email);
 		updateMethod('userName', dataObj.name);
 		updateMethod('picture', dataObj.picture);
+	const [hoverItem, setHoverItem] = useState(null);
+	const [step, setStep] = useState(1);
+	useEffect(() => {
+		//console.log(useFormikContext)
+	}, []);
+
+	// const formik = useFormik({
+	//     initialValues: {
+	//       email: 'foobar@example.com',
+	//       password: 'foobar',
+	//     },
+	//     validationSchema: validationSchema,
+	//     onSubmit: (values) => {
+	//       alert(JSON.stringify(values, null, 2));
+	//     },
+	// });
+ 	
+	const inheritData = (data, updateMethod) => {
+		var dataObj = jwt_decode(data.credential);
+		console.log(dataObj, " OK SIR");
+		updateMethod('email', dataObj.email);
+		updateMethod('userName', dataObj.name);
 		setStep(2);
 	}
 
 	const handleSubmit = () => {
 
 	}
-
 	const saveUser = async ({ firstName, lastName, userName, email, password, picture }) => {
 		dispatch({
 			  type: 'setUser',
