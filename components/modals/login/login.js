@@ -83,7 +83,6 @@ const Login = ({setShowLogin}) => {
 					</div>
 					<h3 className={`mb-3`}>Sign Up</h3>
 					{ step === 1 && (
-						
 					<>
 						<div className={`my-5`}>
 						  	<GoogleLogin
