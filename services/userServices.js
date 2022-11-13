@@ -30,6 +30,14 @@ export const saveNewUser = async(obj) => {
   return resp.data;
 }
 
+export const geoLocation = async() => {
+  let resp = await axios.request({
+    method: "GET",
+    url: "https://geolocation-db.com/json/89eb4d70-4cbe-11ed-a0f2-51b843ebe8d7"
+  })
+  return resp.data;
+}
+
 export const getFormsService =  async () => {
   let resp = await axios.request({
     method: 'POST',

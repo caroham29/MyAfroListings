@@ -5,6 +5,24 @@
   height:100%;
   z-index: 1;
 }
+.itemHolder {
+  display: flex;
+  background-color: white;
+  color:black;
+  padding: 0 15px;
+  line-height: 45px;
+}
+.itemHolder span {
+  font-weight: bold;
+}
+.itemHolder input {
+  border:none;
+  margin: 0 7px 0 20px;
+  outline: 0;
+}
+.itemHolder input:focus {
+  outline:none !important;
+}
 .mainSmText {
   margin-top: 10px;
   font-size: 14px;
@@ -46,6 +64,10 @@
   border-top-right-radius:6px;
   border-bottom-right-radius:6px;
 }
+.iconHolder {
+  cursor: pointer;
+  padding-left: 7px;
+}
 .mainContainer a {
   color:black;
   text-decoration: none;
@@ -72,7 +94,7 @@
 	height:100%;
 	width: 100%;
 	color:white;
-	padding-top: 150px;
+	padding-top: 200px;
 }
 
 .searchContainer {
@@ -89,8 +111,10 @@
 }
 
 .btn {
+  line-height: 45px;
   background-color:#F07616;
-  color:white;
+  color:white !important;
+  height: 45px;
 }
 .btn:hover, .btn:active, .btn:visited {
     background-color: #d4660f !important;

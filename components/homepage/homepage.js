@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useGeolocated } from "react-geolocated";
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
 import styles from "./homepage.module.css";
+import { geoLocation } from "../../services/userServices";
+import { BiLocationPlus } from "react-icons/bi";
 
 const Homepage = () => {
 	useEffect(() => {
-		// var item = document.getElementById('inputItemSearch');
-		// setTimeout(() => {
-		// 	item.focus();
-		// }, 250);
+		var item = document.getElementById('inputItemSearch');
+		setTimeout(() => {
+			item.focus();
+		}, 250);
 		console.log(" Hello ")
 	}, [])
+
+	const findLocation = async () => {
+		const data = await geoLocation();
+		console.log(data, " Locations ")
+	}
 
 	const responseGoogle = (response) => {
 	  console.log(response);
 	}
-    // const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-    //     useGeolocated({
-    //         positionOptions: {
-    //             enableHighAccuracy: true,
-    //         },
-    //         userDecisionTimeout: 5000,
-    //     })
 
 	return (
 		<div className={styles.homepageContainerMain}>
@@ -35,15 +34,18 @@ const Homepage = () => {
 						<h1>Afro Business, Afro Education, Afro Community</h1>
 						<h5 className="m-3">Highest Rated Afro Business Services Directory Worldwide, The Best Afro Travel, Afro Education Directory</h5>
 						<div className={`${styles.searchContainer} p-3 mt-3 form-inline`}>
-							<div className="form-group m-2">
-								<input type="search" id="inputItemSearch" className="form-control" autoComplete="false" placeholder="Ex: business, service, food"/>
+							<div className={`${styles.itemHolder} form-group m-2 rounded`}>
+								<span>Type</span>
+								<input type="search" id="inputItemSearch" autoComplete="false" placeholder="Ex: business, service, food"/>
 							</div>
-							<div className="form-group m-2">
-								<input type="search" className="form-control" autoComplete="false" placeholder="Ex: zip code, city, state"/>
+							<div className={`${styles.itemHolder} form-group m-2 rounded`}>
+								<span>Location</span>
+								<span onClick={findLocation} className={styles.iconHolder}><BiLocationPlus></BiLocationPlus></span>
+								<input type="search" autoComplete="false" placeholder="Ex: zip code, city, state"/>
 							</div>
 							<Button as="a"
 								className={`${styles.btn} m-2`}
-								variant="default">
+								variant="contained">
 						   		Search
 						  	</Button>
 							
