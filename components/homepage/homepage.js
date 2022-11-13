@@ -9,6 +9,8 @@ import { geoLocation } from "../../services/userServices";
 import { BiLocationPlus } from "react-icons/bi";
 
 const Homepage = () => {
+	const [type, setType] = useState('');
+	const [location, setLocation] = useState('');
 	useEffect(() => {
 		var item = document.getElementById('inputItemSearch');
 		setTimeout(() => {
@@ -20,6 +22,7 @@ const Homepage = () => {
 	const findLocation = async () => {
 		const data = await geoLocation();
 		console.log(data, " Locations ")
+		setLocation(data.postal);
 	}
 
 	const responseGoogle = (response) => {
@@ -36,14 +39,27 @@ const Homepage = () => {
 						<div className={`${styles.searchContainer} p-3 mt-3 form-inline`}>
 							<div className={`${styles.itemHolder} form-group m-2 rounded`}>
 								<span>Type</span>
-								<input type="search" id="inputItemSearch" autoComplete="false" placeholder="Ex: business, service, food"/>
+								<input type="search"
+									id="inputItemSearch"
+									autoComplete="false"
+									onChange={(e) => setType(e.target.value)}
+        							value={type}
+									placeholder="Ex: business, service, food"/>
 							</div>
 							<div className={`${styles.itemHolder} form-group m-2 rounded`}>
 								<span>Location</span>
-								<span onClick={findLocation} className={styles.iconHolder}><BiLocationPlus></BiLocationPlus></span>
-								<input type="search" autoComplete="false" placeholder="Ex: zip code, city, state"/>
+								<span onClick={findLocation} className={styles.iconHolder}>
+									<BiLocationPlus></BiLocationPlus>
+								</span>
+								<input
+									className={styles.itemHolderLast}
+									type="search"
+									autoComplete="false"
+									onChange={(e) => setLocation(e.target.value)}
+        							value={location}
+									placeholder="Zip code, city or state"/>
 							</div>
-							<Button as="a"
+							<Button
 								className={`${styles.btn} m-2`}
 								variant="contained">
 						   		Search
