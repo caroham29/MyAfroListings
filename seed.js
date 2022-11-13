@@ -15,19 +15,28 @@ const client = new pg.Client(connectionString)
 
 client.connect(function (err) {
   if (err) console.log(err, " ...Error connecting to PSQL");
+    // client.query(
+    // "CREATE TABLE users(id SERIAL PRIMARY KEY,\
+    //     email varchar(100),\
+    //     fn varchar(50),\
+    //     ln varchar(50),\
+    //     type varchar(50),\
+    //     username varchar(100),\
+    //     pw varchar(50),\
+    //     creationdate varchar(100))", (err, resp) => {
+    //       if (err) {
+    //         console.log(err," Error ")
+    //       } else {
+    //         console.log(resp, " SUCCESS ");
+    //       }
+    //     });
+
     client.query(
-    "CREATE TABLE users(id SERIAL PRIMARY KEY,\
-        email varchar(100),\
-        fn varchar(50),\
-        ln varchar(50),\
-        type varchar(50),\
-        username varchar(100),\
-        pw varchar(50),\
-        creationdate varchar(100))", (err, resp) => {
-          if (err) {
-            console.log(err," Error ")
-          } else {
-            console.log(resp, " SUCCESS ");
-          }
-        });
+    // "ALTER TABLE users ADD picture varchar(200)", (err, resp) => {
+    //       if (err) {
+    //         console.log(err," Error ")
+    //       } else {
+    //         console.log(resp, " SUCCESS ");
+    //       }
+    //     });
 });

@@ -11,12 +11,17 @@
 	padding: 50px;
     position: relative;
     width: 400px;
-    height: 470px;
+    height: 500px;
     border-radius: 12px;
     background: white;
     left: 50%;
 	top: 50%;
 	transform: translate(-50%,-50%);
+}
+.loginBody small {
+	color:tomato;
+	font-size: 13px;
+	position: absolute;
 }
 .closeContainer {
 	cursor: pointer;

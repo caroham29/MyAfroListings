@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+.profilePic {
+	border-radius: 50%;
+	height:25px;
+	width:25px;
+	border:1px solid white;
+	display: table-cell;
+	vertical-align: center;
+}
 .headerContainer {
-	
 	height:35px;
 	background-color: rgba(0,0,0, .7);
 	color:white;
@@ -30,6 +37,15 @@
 	height:100%;
 	cursor: pointer;
 	position: relative;
+}
+
+.rightItemAlt {
+	text-align: center;
+	margin:0 20px;
+	height:100%;
+	width:68px;
+	cursor: pointer;
+	position: relative;	
 }
 
 .rightItem:hover {
@@ -62,6 +78,7 @@
 .hoverOptionsContainer div {
 	cursor: pointer;
 	color:black;
+	text-align: left;
 	line-height: 36px;
 	padding:3px 20px;
 }

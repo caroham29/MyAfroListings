@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
@@ -9,37 +9,50 @@ import { useFormikContext, Formik, Form, Field } from 'formik';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import ReCAPTCHA from "react-google-recaptcha";
+import { saveNewUser } from "../../../services/userServices";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = ({setShowLogin}) => {
 	const { setFieldValue, values, submitForm } = useFormikContext() ?? {};
 	const router = useRouter();
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.user);
+	const [showCapErr, setShowCapErr] = useState(false);
+	const captchaRef = useRef(null)
 	const [hoverItem, setHoverItem] = useState(null);
 	const [step, setStep] = useState(1);
 	useEffect(() => {
-		//console.log(useFormikContext)
 	}, []);
-
-	// const formik = useFormik({
-	//     initialValues: {
-	//       email: 'foobar@example.com',
-	//       password: 'foobar',
-	//     },
-	//     validationSchema: validationSchema,
-	//     onSubmit: (values) => {
-	//       alert(JSON.stringify(values, null, 2));
-	//     },
-	// });
  	
 	const inheritData = (data, updateMethod) => {
 		var dataObj = jwt_decode(data.credential);
-		console.log(dataObj, " OK SIR");
 		updateMethod('email', dataObj.email);
 		updateMethod('userName', dataObj.name);
+		updateMethod('picture', dataObj.picture);
 		setStep(2);
 	}
 
 	const handleSubmit = () => {
 
+	}
+
+	const saveUser = async ({ firstName, lastName, userName, email, password, picture }) => {
+		dispatch({
+			  type: 'setUser',
+			  user: { firstName, lastName, userName, email, password, picture },
+		})
+		setShowLogin(false);
+		//let user = await saveNewUser({ firstName, lastName, userName, email, password, picture });
+		// if (user.id) {
+		// 	// Saved successfully
+		// 	dispatch({
+		// 	  type: 'setUser',
+		// 	  user,
+		// 	})
+		// } else {
+
+		// }
+		// console.log(data, " Saved ");
 	}
 
 	return (
@@ -50,11 +63,17 @@ const Login = ({setShowLogin}) => {
 	        	userName: '',
 	        	email: '',
 	        	password:'',
-	        	confirm:'',
+	        	picture: '',
 	      	}}
+
 	      	onSubmit={async (values) => {
-	        await new Promise((r) => setTimeout(r, 500));
-	        alert(JSON.stringify(values, null, 2));
+	      		// Verify captcha value then save
+	      		const token = captchaRef.current.getValue();
+	      		if (!token) {
+	      			setShowCapErr(true);
+	      		} else {
+	      			saveUser(values);
+	      		}
 	      	}}
 			render={({ setFieldValue, values, handleChange, touched, errors }) => (
 			<div className={`${styles.loginContainer}`}>
@@ -62,7 +81,7 @@ const Login = ({setShowLogin}) => {
 					<div className={styles.closeContainer}>
 						<GrFormClose onClick={() => setShowLogin(false)}/>
 					</div>
-					<h3>Sign Up</h3>
+					<h3 className={`mb-3`}>Sign Up</h3>
 					{ step === 1 && (
 					<>
 					  	<GoogleLogin
@@ -88,11 +107,12 @@ const Login = ({setShowLogin}) => {
 					)}
 					{ step === 2 && (
 					<>
-				      <Form>
+				      <Form >
 						<TextField
 				            fullWidth
 				            id="userName"
 				            name="userName"
+				            required
 				            label="Display name"
 				            className={`my-2`}
 				            value={values.userName}
@@ -104,6 +124,7 @@ const Login = ({setShowLogin}) => {
 				        	className={`my-2`}
 				        	fullWidth
 				          	id="email"
+				          	required
 				          	name="email"
 				          	label="Email"
 				          	value={values.email}
@@ -113,22 +134,25 @@ const Login = ({setShowLogin}) => {
 				        />
 				        <TextField
 				        	className={`my-2`}
-				          fullWidth
-				          id="password"
-				          name="password"
-				          label="Password"
-				          type="password"
-				          value={values.password}
-				          onChange={handleChange}
-				          error={touched.password && Boolean(errors.password)}
-				          helperText={touched.password && errors.password}
+				          	fullWidth
+				          	id="password"
+				          	required
+				          	name="password"
+				          	label="Password"
+				          	type="password"
+				          	value={values.password}
+				          	onChange={handleChange}
+				          	error={touched.password && Boolean(errors.password)}
+				          	helperText={touched.password && errors.password}
 				        />
-						  <ReCAPTCHA
+						<ReCAPTCHA
 						  	className={`mt-3`}
+						  	onChange={(val) => setShowCapErr(!val)}
 						    sitekey="6Lc0rfwiAAAAABZCRu6RliDMY0PCaQW2exz1CKsq"
-						    
-						  />
-				        <Button className={`mt-4`} color="primary" variant="contained" fullWidth type="button">
+						    ref={captchaRef}
+						/>
+						{ showCapErr && ( <small>CAPTCHA response required.</small> ) }
+				        <Button className={`mt-5`} color="primary" variant="contained" fullWidth type="submit">
 				          Sign up
 				        </Button>
 				      </Form>

@@ -51,10 +51,11 @@
     "react-google-recaptcha": "^2.1.0",
     "react-icons": "^4.6.0",
     "react-moment": "^1.1.1",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.3.0",
     "react-select": "^5.2.1",
     "react-toastify": "^8.2.0",
-    "redux": "^4.1.1",
+    "redux": "^4.2.0",
     "samba-client": "^4.0.0",
     "smb2": "^0.2.11",
     "xlsx": "^0.17.5"

@@ -41,6 +41,19 @@ app.prepare()
     if (err) throw err
     console.log(' Ready on... ' , this, server.settings.env)
   })
+
+  server.post('/saveForm', (req, res) => {
+    const { email, username, password, picture } = req.headers;
+    client.query("INSERT INTO users(username, type, email, pw, picture) VALUES ($1,$2,$3,$4,$5) RETURNING ID", 
+      [username, 'standard', email, password, picture], (e, resp) => { // Encrypt password later... 
+      if (e) console.log(e, " Error insterting new user");
+      res.end(JSON.stringify(r.rows && r.rows.length 
+        ? r.rows[0]
+        : {}
+      ))
+    })
+  })
+
 })
 .catch((ex) => {
   console.error(ex.stack)
