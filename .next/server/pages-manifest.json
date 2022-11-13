@@ -1,0 +1,13 @@
+{
+  "/_app": "pages/_app.js",
+  "/about": "pages/about.html",
+  "/business-listings": "pages/business-listings.html",
+  "/education-listings": "pages/education-listings.html",
+  "/housing-listings": "pages/housing-listings.html",
+  "/": "pages/index.html",
+  "/news": "pages/news.html",
+  "/travel-listings": "pages/travel-listings.html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
+}
