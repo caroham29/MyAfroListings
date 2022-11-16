@@ -14,3 +14,7 @@ package-lock.json
 
 # production
 /build
+
+# enviornment variables
+
+/.env/

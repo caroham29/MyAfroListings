@@ -1,3 +1,4 @@
+require('dotenv').config();
 var fs = require('fs');
 var XLSX = require('xlsx');
 var nodemailer = require('nodemailer');
@@ -10,7 +11,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 var pg =  require('pg');
 // pg.defaults.ssl = false;
-var connectionString = "pg://postgres:Verizon59!@afro-listings-master.cfrpea2gfrpi.us-west-1.rds.amazonaws.com:5432";
+var connectionString = process.env.CONNECTION_STRING;
 const client = new pg.Client(connectionString)
 
 client.connect(function (err) {
