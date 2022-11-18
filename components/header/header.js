@@ -11,11 +11,10 @@ const Header = () => {
 	const [hoverItem, setHoverItem] = useState(null);
 	const [showLogin, setShowLogin] = useState(false);
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.user);
+	const user = useSelector((store) => store.user);
 	useEffect(() => {
-		console.log(user, " User from store  from header ")
-
-	}, [user])
+		console.log(user, " User from store  from header ");
+	}, [user]);
 
 	const home = () => router.push('/');
 	const viewBusiness = () => router.push('/business-listings');
@@ -26,10 +25,11 @@ const Header = () => {
 
 	const signOut = () => {
 		dispatch({
-			  type: 'setUser',
-			  user: null,
+			type: 'setUser',
+			user: null,
 		})
 	}
+
 	return (
 		<>
 		{ showLogin && (
@@ -52,19 +52,25 @@ const Header = () => {
 				</div>
 				<div onClick={() => viewTravel()} className={`${styles.rightItem} ${router.pathname === '/travel-listings' ? styles.active  : null}`}>Travel</div>
 				<div className={styles.rightItemAlt} onMouseOver={() => setHoverItem('Profile')} onMouseLeave={() => setHoverItem(null)}>
-				{ user && user.picture
+				{ user && user.id
 					? 
-					( <div>
-						<img className={styles.profilePic} src="https://lh3.googleusercontent.com/a/ALm5wu3Kd-5Oiw5QLzwcAI8mQMrv2wf94TPw8qRjVwdjeA=s96-c"/>
+					(
+						<> 
+						{ user.picture !== 'undefined'
+							?
+							( <div>
+								<img className={styles.profilePic} src={user.picture}/>
+							</div> )
+							: ( <div className={styles.profilePicAlt}>{user.username[0].toUpperCase()}</div> )
+						}
 						{hoverItem === "Profile" && (
-							<div className={`${styles.hoverOptionsContainer} border`}>
-								<div>Profile</div>
-								<div onClick={signOut}>Sign Out</div>
-							</div>
+						<div className={`${styles.hoverOptionsContainer} border`}>
+							<div>Profile</div>
+							<div onClick={signOut}>Sign Out</div>
+						</div>
 						)}
-					</div>
-					)
-					: <div onClick={() => setShowLogin(true)}>Join Now</div>
+					</>)
+					: <div onClick={() => setShowLogin(true)}>Sign in</div>
 				}
 				</div>
 			</div>

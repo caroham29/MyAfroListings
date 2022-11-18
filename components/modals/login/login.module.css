@@ -1,3 +1,47 @@
+.loginErrContainer {
+	border:1px solid tomato;
+	border-radius: 4px;
+	background-color: #FFE8E4;
+	padding:20px 30px;
+	font-size: 13px;
+	margin-bottom: 20px;
+}
+.bottomContainer {
+	min-height: 365px;
+}
+
+.privacy {
+	color:#767676 !important;
+	font-size: 13px;
+	width:100%;
+}
+.signInBtn {
+	align-self: flex-end;
+}
+.errHeader {
+	font-weight: bolder;
+}
+.container {
+	min-height: 365px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.reset {
+	color:dodgerblue !important;
+	cursor: pointer;
+}
+.needAccount {
+	font-size: 13px;
+}
+
+.needAccount a {
+	color:dodgerblue !important;
+	cursor: pointer;
+}
+
 .loginContainer {
 	position: fixed;
 	width:100%;
@@ -11,7 +55,7 @@
 	padding: 50px;
     position: relative;
     width: 400px;
-    height: 500px;
+    min-height: 500px;
     border-radius: 12px;
     background: white;
     left: 50%;

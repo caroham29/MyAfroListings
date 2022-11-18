@@ -6,6 +6,18 @@
 	border:1px solid white;
 	display: table-cell;
 	vertical-align: center;
+	margin-top: 5px;
+}
+.profilePicAlt {
+	margin: auto;
+	height:25px;
+	width:25px;
+	border-radius: 50%;
+	border:1px solid white;
+	background-color: #5C42E5;
+	margin-top: 5px;
+	line-height: 25px;
+    vertical-align: middle;
 }
 .headerContainer {
 	height:35px;

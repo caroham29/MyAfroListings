@@ -21,10 +21,23 @@ export const updateFormService = async(obj) => {
     })
 }
 
+export const login = async({ email, password }) => {
+  let resp = await axios.request({
+    method: 'POST',
+      url: '/login',
+      headers : {
+        email,
+        password
+      }
+    })
+
+  return resp.data;
+}
+
 export const saveNewUser = async(obj) => {
   let resp = await axios.request({
     method: 'POST',
-      url: '/saveForm',
+      url: '/saveUser',
       headers : obj
     })
   return resp.data;

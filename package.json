@@ -24,6 +24,7 @@
     "@react-oauth/google": "^0.4.0",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.22.0",
+    "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -59,7 +60,8 @@
     "redux": "^4.2.0",
     "samba-client": "^4.0.0",
     "smb2": "^0.2.11",
-    "xlsx": "^0.17.5"
+    "xlsx": "^0.17.5",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",

@@ -9,18 +9,34 @@ import { useFormikContext, Formik, Form, Field } from 'formik';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import ReCAPTCHA from "react-google-recaptcha";
-import { saveNewUser } from "../../../services/userServices";
+import { saveNewUser, login} from "../../../services/userServices";
 import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
 
 const Login = ({setShowLogin}) => {
 	const { setFieldValue, values, submitForm } = useFormikContext() ?? {};
 	const router = useRouter();
 	const dispatch = useDispatch();
+	const [loginErr, setLoginErr] = useState(false);
 	const user = useSelector((state) => state.user);
 	const [showCapErr, setShowCapErr] = useState(false);
 	const captchaRef = useRef(null)
 	const [hoverItem, setHoverItem] = useState(null);
 	const [step, setStep] = useState(1);
+
+	const SignupSchema = Yup.object().shape({
+	   	password: Yup.string()
+	   		.min(3, "Password must be at least 4 characters")
+	   		.max(25, "Password must be less than 26 characters")
+	   		.required('Required'),
+	  	email: Yup.string().email('Invalid email').required('Required'),
+	});
+
+	const SigninSchema = Yup.object().shape({
+	   	password: Yup.string().required('Required'),
+	  	email: Yup.string().email('Invalid email').required('Required'),
+	});
+
 	useEffect(() => {
 	}, []);
  	
@@ -33,136 +49,182 @@ const Login = ({setShowLogin}) => {
 		setStep(2);
 	}
 
-	const handleSubmit = () => {
-
-	}
 	const saveUser = async ({ firstName, lastName, userName, email, password, picture }) => {
-		dispatch({
+		// setShowLogin(false);
+		let user = await saveNewUser({ firstName, lastName, userName, email, password, picture });
+		console.log(user, " Hello ");
+		if (user.id) {
+			// Saved successfully
+			dispatch({
 			  type: 'setUser',
-			  user: { firstName, lastName, userName, email, password, picture },
-		})
-		setShowLogin(false);
-		//let user = await saveNewUser({ firstName, lastName, userName, email, password, picture });
-		// if (user.id) {
-		// 	// Saved successfully
-		// 	dispatch({
-		// 	  type: 'setUser',
-		// 	  user,
-		// 	})
-		// } else {
+			  user,
+			})
+			setShowLogin(false);
+		} else {
 
-		// }
-		// console.log(data, " Saved ");
+		}
 	}
 
 	return (
-		<Formik
-	        initialValues={{
-	        	firstName: '',
-	        	lastName: '',
-	        	userName: '',
-	        	email: '',
-	        	password:'',
-	        	picture: '',
-	      	}}
-
-	      	onSubmit={async (values) => {
-	      		// Verify captcha value then save
-	      		const token = captchaRef.current.getValue();
-	      		if (!token) {
-	      			setShowCapErr(true);
-	      		} else {
-	      			saveUser(values);
-	      		}
-	      	}}
-			render={({ setFieldValue, values, handleChange, touched, errors }) => (
-			<div className={`${styles.loginContainer}`}>
-				<div className={styles.loginBody}>
-					<div className={styles.closeContainer}>
-						<GrFormClose onClick={() => setShowLogin(false)}/>
-					</div>
-					<h3 className={`mb-3`}>Sign Up</h3>
-					{ step === 1 && (
-					<>
-						<div className={`my-5`}>
-						  	<GoogleLogin
-						  		onSuccess={(resp) => inheritData(resp, setFieldValue)}
-						  		width='300'
-						  		text='continue_with'
-						  		shape='pill'
-						  		onError={() => {
-						    		console.log('Login Failed');
-						  		}}
-							/>
-						</div>
-						<div className={styles.orContainer}>
-							<span className={styles.orContainerBorder}></span>
-							<span className={styles.orItem}>OR</span>
-							<span className={styles.orContainerBorder}></span>
-						</div>
-						<Button as="a"
-							onClick={() => setStep(2)}
-							color="primary" variant="contained" fullWidth>
-					   		CONTINUE
-					  	</Button>
-				  	</>
+		<div className={`${styles.loginContainer}`}>
+			<div className={styles.loginBody}>
+				<div className={styles.closeContainer}>
+					<GrFormClose onClick={() => setShowLogin(false)}/>
+				</div>
+				<h2 className={`mb-1`}>Sign in</h2>
+				<div className={`${styles.needAccount} mb-4`}>Need an account?
+					<a onClick={() => setStep(2)}> Join Afro Listings</a>
+				</div>
+				<div className={styles.bottomContainer}>
+				{ step === 1 && (
+				<Formik
+			        initialValues={{
+			        	email: '',
+			        	password:'',
+			        	picture: '',
+			      	}}
+			      	validationSchema={SigninSchema}
+			      	onSubmit={async (values) => {
+			      		const user = await login(values);
+			      		console.log(user, " User data. ");
+			      		// User found, dispatch setUser and continue
+			      		if (user.id) {
+			      			dispatch({
+								type: 'setUser',
+								user,
+							});
+							setShowLogin(false);
+			      		} else {
+			      			// User not found, show login err
+			      			setLoginErr(true);
+			      		}
+			      	}}>
+					{({ setFieldValue, values, handleChange, touched, errors }) => (
+						<Form >
+							<div className={`${styles.container}`}>
+							{ loginErr && (
+								<div className={styles.loginErrContainer}>
+									<div className={styles.errHeader}>Error</div>
+									<div>The email address and/or password you entered do not match any accounts on record. Need help?</div>
+									<div className={styles.reset}>Reset your password</div>
+								</div>
+							)}
+								<div className={`mb-4`}>
+								  	<GoogleLogin
+								  		onSuccess={(resp) => inheritData(resp, setFieldValue)}
+								  		width='300'
+								  		text='continue_with'
+								  		shape='square'
+								  		onError={() => { console.log('Login Failed') }}
+									/>
+								</div>
+						        <TextField
+						        	className={`my-2`}
+						        	fullWidth
+						          	id="email"
+						          	required
+						          	name="email"
+						          	label="Email"
+						          	value={values.email}
+						          	onChange={handleChange}
+						          	error={touched.email && Boolean(errors.email)}
+						          	helperText={touched.email && errors.email}
+						        />
+						        <TextField
+						        	className={`my-2`}
+						          	fullWidth
+						          	id="password"
+						          	required
+						          	name="password"
+						          	label="Password"
+						          	type="password"
+						          	value={values.password}
+						          	onChange={handleChange}
+						          	error={touched.password && Boolean(errors.password)}
+						          	helperText={touched.password && errors.password}
+						        />
+						        <div className={styles.privacy}>By signing in you agree to Afro's Terms and Privacy</div>
+						        <Button className={`mt-5 ${styles.signInBtn}`} color="primary" variant="contained" fullWidth type="submit">
+						          Sign In
+						        </Button>
+						  	</div>
+					  	</Form>
+					  	)}
+				  	</Formik>
 					)}
 					{ step === 2 && (
-					<>
-				      <Form >
-						<TextField
-				            fullWidth
-				            id="userName"
-				            name="userName"
-				            required
-				            label="Display name"
-				            className={`my-2`}
-				            value={values.userName}
-				            onChange={handleChange}
-				            error={touched.userName && Boolean(errors.userName)}
-				            helperText={touched.userName && errors.userName}
-				        />
-				        <TextField
-				        	className={`my-2`}
-				        	fullWidth
-				          	id="email"
-				          	required
-				          	name="email"
-				          	label="Email"
-				          	value={values.email}
-				          	onChange={handleChange}
-				          	error={touched.email && Boolean(errors.email)}
-				          	helperText={touched.email && errors.email}
-				        />
-				        <TextField
-				        	className={`my-2`}
-				          	fullWidth
-				          	id="password"
-				          	required
-				          	name="password"
-				          	label="Password"
-				          	type="password"
-				          	value={values.password}
-				          	onChange={handleChange}
-				          	error={touched.password && Boolean(errors.password)}
-				          	helperText={touched.password && errors.password}
-				        />
-						<ReCAPTCHA
-						  	className={`mt-3`}
-						  	onChange={(val) => setShowCapErr(!val)}
-						    sitekey="6Lc0rfwiAAAAABZCRu6RliDMY0PCaQW2exz1CKsq"
-						    ref={captchaRef}
-						/>
-						{ showCapErr && ( <small>CAPTCHA response required.</small> ) }
-				        <Button className={`mt-5`} color="primary" variant="contained" fullWidth type="submit">
-				          Sign up
-				        </Button>
-				      </Form>
-				  	</>
+					<Formik 
+						initialValues={{
+			        	userName: '',
+			        	email: '',
+			        	password:''
+			      	}}
+			      	validationSchema={SignupSchema}
+			      	onSubmit={async (values) => {
+			      		// Verify captcha value then save new user
+			      		const token = captchaRef.current.getValue();
+			      		if (!token) {
+			      			setShowCapErr(true);
+			      		} else {
+			      			saveUser(values);
+			      		}
+			      	}}>
+					{({ setFieldValue, values, handleChange, touched, errors }) => (
+						<Form>
+							<TextField
+					            fullWidth
+					            id="userName"
+					            name="userName"
+					            required
+					            label="Display name"
+					            className={`my-2`}
+					            value={values.userName}
+					            onChange={handleChange}
+					            error={touched.userName && Boolean(errors.userName)}
+					            helperText={touched.userName && errors.userName}
+					        />
+					        <TextField
+					        	className={`my-2`}
+					        	fullWidth
+					          	id="email"
+					          	required
+					          	name="email"
+					          	label="Email"
+					          	value={values.email}
+					          	onChange={handleChange}
+					          	error={touched.email && Boolean(errors.email)}
+					          	helperText={touched.email && errors.email}
+					        />
+					        <TextField
+					        	className={`my-2`}
+					          	fullWidth
+					          	id="password"
+					          	required
+					          	name="password"
+					          	label="Password"
+					          	type="password"
+					          	value={values.password}
+					          	onChange={handleChange}
+					          	error={touched.password && Boolean(errors.password)}
+					          	helperText={touched.password && errors.password}
+					        />
+							<ReCAPTCHA
+							  	className={`mt-3`}
+							  	onChange={(val) => setShowCapErr(!val)}
+							    sitekey="6Lc0rfwiAAAAABZCRu6RliDMY0PCaQW2exz1CKsq"
+							    ref={captchaRef}
+							/>
+							{ showCapErr && ( <small>CAPTCHA response required.</small> ) }
+					        <Button className={`mt-5 ${styles.signInBtn}`} color="primary" variant="contained" fullWidth type="submit">
+					          Sign Up
+					        </Button>
+					 	</Form>
 					)}
+					</Formik>
+				)}
 				</div>
 			</div>
-		)}/>
+		</div>
 	)
 }
 

@@ -32,11 +32,11 @@ client.connect(function (err) {
     //     });
 
     client.query(
-    // "ALTER TABLE users ADD picture varchar(200)", (err, resp) => {
-    //       if (err) {
-    //         console.log(err," Error ")
-    //       } else {
-    //         console.log(resp, " SUCCESS ");
-    //       }
-    //     });
+    "ALTER TABLE users ALTER COLUMN pw TYPE varchar(150)", (err, resp) => {
+          if (err) {
+            console.log(err," Error ")
+          } else {
+            console.log(resp, " SUCCESS ");
+          }
+        });
 });

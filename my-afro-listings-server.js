@@ -2,17 +2,19 @@ require('dotenv').config();
 var fs = require('fs');
 var XLSX = require('xlsx');
 var nodemailer = require('nodemailer');
-const express = require('express')
-const next = require('next')
-var https = require('https')
-const cors = require('cors')   
-const dev = process.env.NODE_ENV !== 'production'
+const express = require('express');
+const next = require('next');
+var https = require('https');
+const cors = require('cors');
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev })
-const handle = app.getRequestHandler()
+const handle = app.getRequestHandler();
 var pg =  require('pg');
 // pg.defaults.ssl = false;
 var connectionString = process.env.CONNECTION_STRING;
-const client = new pg.Client(connectionString)
+const client = new pg.Client(connectionString);
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 client.connect(function (err) {
   if (err) console.log(err, " ...Error connecting to PSQL");
@@ -40,16 +42,28 @@ app.prepare()
  
   server.listen(9000, (err) => {
     if (err) throw err
-    console.log(' Ready on... ' , this, server.settings.env)
+    console.log(' Ready on... ' , this, server.settings.env);
   })
 
-  server.post('/saveForm', (req, res) => {
+  server.post('/login', async (req, res) => {
+    const { email, password } = req.headers;
+    const user = await client.query("SELECT * FROM users WHERE email=($1)", [email.trim()]); // Fetch by email then check encrypted password
+    if (user.rows && bcrypt.compareSync(password, user.rows[0].pw)) {
+      res.end(JSON.stringify(user.rows[0]));
+    } else {
+      res.end(JSON.stringify({}));
+    }
+  })
+
+  server.post('/saveUser', (req, res) => {
     const { email, username, password, picture } = req.headers;
-    client.query("INSERT INTO users(username, type, email, pw, picture) VALUES ($1,$2,$3,$4,$5) RETURNING ID", 
-      [username, 'standard', email, password, picture], (e, resp) => { // Encrypt password later... 
+    const hash = bcrypt.hashSync(password, saltRounds);
+    client.query("INSERT INTO users(username, type, email, pw, picture) VALUES ($1,$2,$3,$4,$5) RETURNING ID",
+      [username, 'standard', email, hash, picture], (e, resp) => { // Encrypt password later...
       if (e) console.log(e, " Error insterting new user");
-      res.end(JSON.stringify(r.rows && r.rows.length 
-        ? r.rows[0]
+      console.log(resp, " Resp ");
+      res.end(JSON.stringify(resp?.rows && resp?.rows?.length
+        ? resp.rows[0]
         : {}
       ))
     })
