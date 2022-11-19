@@ -85,6 +85,7 @@ const Login = ({setShowLogin}) => {
 			      	}}
 			      	validationSchema={SigninSchema}
 			      	onSubmit={async (values) => {
+			      		console.log(values)
 			      		const user = await login(values);
 			      		console.log(user, " User data. ");
 			      		// User found, dispatch setUser and continue

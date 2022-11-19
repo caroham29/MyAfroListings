@@ -7,22 +7,30 @@ import Button from '@material-ui/core/Button';
 import styles from "./homepage.module.css";
 import { geoLocation } from "../../services/userServices";
 import { BiLocationPlus } from "react-icons/bi";
+import { categories } from "../../services/static-data";
 
 const Homepage = () => {
 	const [type, setType] = useState('');
+	const [showCategories, setShowCategories] = useState(false);
 	const [location, setLocation] = useState('');
 	useEffect(() => {
 		var item = document.getElementById('inputItemSearch');
-		setTimeout(() => {
-			item.focus();
-		}, 250);
-		console.log(" Hello ")
+		// setTimeout(() => {
+		// 	item.focus();
+		// }, 250);
+		console.log(" Hello ", categories)
 	}, [])
 
 	const findLocation = async () => {
 		const data = await geoLocation();
 		console.log(data, " Locations ")
 		setLocation(data.postal);
+	}
+
+	const setCategory = (type) => {
+		console.log(type)
+		setType(type);
+		setShowCategories(false);
 	}
 
 	const responseGoogle = (response) => {
@@ -33,7 +41,7 @@ const Homepage = () => {
 		<div className={styles.homepageContainerMain}>
 			<div className={styles.homepageContainer}>
 				<div className={styles.homepageOverlay}>
-					<div>
+					<div className={`position-relative`}>
 						<h1>Afro Business, Afro Education, Afro Community</h1>
 						<h5 className="m-3">Highest Rated Afro Business Services Directory Worldwide, The Best Afro Travel, Afro Education Directory</h5>
 						<div className={`${styles.searchContainer} p-3 mt-3 form-inline`}>
@@ -42,9 +50,16 @@ const Homepage = () => {
 								<input type="search"
 									id="inputItemSearch"
 									autoComplete="false"
+									onFocus={() => setShowCategories(true)}
 									onChange={(e) => setType(e.target.value)}
         							value={type}
 									placeholder="Ex: business, service, food"/>
+								 	<div className={`${styles.categoriesContainer} ${ showCategories ? styles.display : null}`}>
+									 	{ 
+									 	categories.map(function(item, i) {
+								        	return <div key={i} onClick={() => setCategory(item)}>{item}</div>
+									 	})}
+							    	</div>
 							</div>
 							<div className={`${styles.itemHolder} form-group m-2 rounded`}>
 								<span>Location</span>
@@ -72,7 +87,7 @@ const Homepage = () => {
 				    <source src="https://josephfarmsmedia.s3.us-west-1.amazonaws.com/BGMovie.mp4" type="video/mp4"></source>
 				</video>
 			</div>
-			<div className={`d-inline-flex p-5 mx-3`}>
+			<div className={`d-inline-flex p-5 mx-3 position-relative`}>
 				<div className={styles.gridContainer}>
 					  <div className={styles.item1}>
 					  	<img className={styles.img} src={"/tutor1.jpg"}/>

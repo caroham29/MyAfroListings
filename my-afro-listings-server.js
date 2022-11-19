@@ -48,7 +48,7 @@ app.prepare()
   server.post('/login', async (req, res) => {
     const { email, password } = req.headers;
     const user = await client.query("SELECT * FROM users WHERE email=($1)", [email.trim()]); // Fetch by email then check encrypted password
-    if (user.rows && bcrypt.compareSync(password, user.rows[0].pw)) {
+    if (user.rows.length && bcrypt.compareSync(password, user.rows[0].pw)) {
       res.end(JSON.stringify(user.rows[0]));
     } else {
       res.end(JSON.stringify({}));
