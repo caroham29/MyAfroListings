@@ -10,7 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev })
 const handle = app.getRequestHandler();
 var pg =  require('pg');
-// pg.defaults.ssl = false;
+pg.defaults.ssl = false;
 var connectionString = process.env.CONNECTION_STRING;
 const client = new pg.Client(connectionString);
 const bcrypt = require('bcrypt');

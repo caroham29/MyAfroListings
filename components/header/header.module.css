@@ -81,7 +81,7 @@
 	margin-top: 35px;
 	display: block;
 	line-height: 36px;
-	width: 220px;
+	width: 200px;
 	background-color: white;
 	border-radius: 3px;
 }
@@ -90,8 +90,12 @@
 	cursor: pointer;
 	color:black;
 	text-align: left;
-	line-height: 36px;
-	padding:3px 20px;
+	height: 36px;
+	padding:0 20px;
+    display: flex;
+    margin: auto;
+    align-items:center;
+    font-size: 14px;
 }
 
 .hoverOptionsContainer div:hover {
@@ -99,3 +103,6 @@
 	border-radius: inherit;
 }
 
+.profileItems {
+	padding-left: 15px;
+}

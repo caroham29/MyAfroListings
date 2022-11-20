@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GoTriangleUp } from "react-icons/go";
 import styles from "./header.module.css";
 import Login from "../modals/login/login";
+import { BsPlusSquare } from "react-icons/Bs";
+import { BiUser } from "react-icons/Bi";
+import { IoExitOutline } from 'react-icons/io5'
 
 const Header = () => {
 	const router = useRouter();
@@ -65,8 +68,18 @@ const Header = () => {
 						}
 						{hoverItem === "Profile" && (
 						<div className={`${styles.hoverOptionsContainer} border`}>
-							<div>Profile</div>
-							<div onClick={signOut}>Sign Out</div>
+							<div>
+								<BiUser/>
+								<span className={styles.profileItems}>Profile</span>
+							</div>
+							<div onClick={signOut}>
+								<BsPlusSquare/>
+								<span className={styles.profileItems}>Create Listing</span>
+							</div>
+							<div onClick={signOut}>
+								<IoExitOutline />
+								<span className={styles.profileItems}>Sign Out</span>
+							</div>
 						</div>
 						)}
 					</>)
