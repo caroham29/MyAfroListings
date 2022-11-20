@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GoTriangleUp } from "react-icons/go";
 import styles from "./header.module.css";
 import Login from "../modals/login/login";
+import CreateListings from "../modals/create-listings/create-listings";
 import { BsPlusSquare } from "react-icons/Bs";
 import { BiUser } from "react-icons/Bi";
 import { IoExitOutline } from 'react-icons/io5'
@@ -13,6 +14,7 @@ const Header = () => {
 	const router = useRouter();
 	const [hoverItem, setHoverItem] = useState(null);
 	const [showLogin, setShowLogin] = useState(false);
+	const [showCreateListing, setShowCreateListing] = useState(false);
 	const dispatch = useDispatch();
 	const user = useSelector((store) => store.user);
 	useEffect(() => {
@@ -31,6 +33,11 @@ const Header = () => {
 			type: 'setUser',
 			user: null,
 		})
+	}
+
+	const create = () => {
+		console.log(user.id)
+		router.push(`/user/listings/${user.id}`);
 	}
 
 	return (
@@ -72,7 +79,7 @@ const Header = () => {
 								<BiUser/>
 								<span className={styles.profileItems}>Profile</span>
 							</div>
-							<div onClick={signOut}>
+							<div onClick={create}>
 								<BsPlusSquare/>
 								<span className={styles.profileItems}>Create Listing</span>
 							</div>
