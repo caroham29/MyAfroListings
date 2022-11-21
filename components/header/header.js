@@ -7,7 +7,7 @@ import styles from "./header.module.css";
 import Login from "../modals/login/login";
 import CreateListings from "../modals/create-listings/create-listings";
 import { BsPlusSquare } from "react-icons/bs";
-import { BiUser } from "react-icons/Bi";
+import { BiUser } from "react-icons/bi";
 import { IoExitOutline } from 'react-icons/io5'
 
 const Header = () => {
