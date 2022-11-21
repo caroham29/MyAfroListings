@@ -13,6 +13,11 @@ function reducer(state = { user: null }, action) {
       	...state,
         user: action.user,
      }
+    case 'setShowNewListing':
+      return {
+        ...state,
+        showNewListing:  action.showNewListing,
+      }
     default:
       return state
   }

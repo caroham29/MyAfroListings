@@ -9,7 +9,7 @@ import CreateListings from "../../modals/create-listings/create-listings";
 const Listings = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const [showCreateListing, setShowCreateListing] = useState(true);
+	const showNewListing = useSelector((store) => store.showNewListing);
 	const user = useSelector((store) => store.user);
 	useEffect(() => {
 		console.log(user, " User from store  from Listings ");
@@ -20,9 +20,9 @@ const Listings = () => {
 		<div className={styles.container}>
 			Listings... 
 		</div>
-		{ showCreateListing && (
+		{ showNewListing && (
 		<div className={styles.createContainer}>
-			<CreateListings setShowCreateListing={setShowCreateListing}></CreateListings>
+			<CreateListings></CreateListings>
 		</div>
 		)}
 		</>

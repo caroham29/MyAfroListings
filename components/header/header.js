@@ -36,8 +36,12 @@ const Header = () => {
 	}
 
 	const create = () => {
-		console.log(user.id)
+		console.log(user.id);
 		router.push(`/user/listings/${user.id}`);
+		dispatch({
+			type: 'setShowNewListing',
+			showNewListing: true,
+		})
 	}
 
 	return (

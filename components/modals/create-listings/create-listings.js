@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-const CreateListings = ({setShowCreateListing}) => {
+const CreateListings = () => {
 	const { setFieldValue, values, submitForm } = useFormikContext() ?? {};
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -37,13 +37,20 @@ const CreateListings = ({setShowCreateListing}) => {
 	   		.required('Required'),
 	  	description: Yup.string().required('Required'),
 	});
+
+	const close = () => {
+		dispatch({
+			type: 'setShowNewListing',
+			showNewListing: false,
+		})
+	}
  	
 
 	return (
 		<div className={`${styles.loginContainer}`}>
 			<div className={styles.createListingModalContainer}>
 				<div className={styles.closeContainer}>
-					<GrFormClose onClick={() => setShowCreateListing(false)}/>
+					<GrFormClose onClick={() => close()}/>
 				</div>
 				<div className={`${styles.formContainer}`}>
 				<h2 className={`mb-1`}> Create Listing </h2>
