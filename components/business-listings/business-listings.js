@@ -10,7 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { BsEye, BsBookmark } from "react-icons/Bs";
+import { BsEye, BsBookmark } from "react-icons/bs";
 
 const Business = () => {
    const editorRef = useRef(null);
