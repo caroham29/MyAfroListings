@@ -3,10 +3,6 @@
 # dependencies
 /node_modules
 
-# We use yarn so we shouldn't have a package-lock.json
-package-lock.json
-
-
 
 # next.js
 /.next/
