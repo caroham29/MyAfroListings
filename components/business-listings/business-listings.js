@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { BsEye, BsBookmark } from "react-icons/bs";
 
-const Business = () => {
+const BusinessListings = () => {
    const editorRef = useRef(null);
    const theme = useTheme();
    const log = () => {
@@ -71,4 +71,4 @@ const Business = () => {
 	)
 }
 
-export default Business
+export default BusinessListings
