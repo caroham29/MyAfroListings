@@ -5,7 +5,6 @@ import { createStore } from 'redux'
 
 
 function reducer(state = { user: null }, action) {
-  console.log(action)
   switch (action.type) {
     case 'setUser':
       return {
