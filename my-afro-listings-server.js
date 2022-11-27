@@ -36,6 +36,7 @@ app.prepare()
   server.use(allowCrossDomain);
 
   server.get('/login', async (req, res) => {
+    // Login
     const { email, password } = req.headers;
     const user = await client.query("SELECT * FROM users WHERE email=($1)", [email.trim()]); // Fetch by email then check encrypted password
     if (user.rows.length && bcrypt.compareSync(password, user.rows[0].pw)) {
