@@ -35,17 +35,7 @@ app.prepare()
   server.use(express.json()); 
   server.use(allowCrossDomain);
 
-  // Must be nextjs page...
-  server.get('*', (req, res) => {
-    return handle(req, res)
-  })
- 
-  server.listen(9000, (err) => {
-    if (err) throw err
-    console.log(' Ready on... ' , this, server.settings.env);
-  })
-
-  server.post('/login', async (req, res) => {
+  server.get('/login', async (req, res) => {
     const { email, password } = req.headers;
     const user = await client.query("SELECT * FROM users WHERE email=($1)", [email.trim()]); // Fetch by email then check encrypted password
     if (user.rows.length && bcrypt.compareSync(password, user.rows[0].pw)) {
@@ -53,6 +43,16 @@ app.prepare()
     } else {
       res.end(JSON.stringify({}));
     }
+  })
+
+  // Must be nextjs page... Handle all other request
+  server.get('*', (req, res) => {
+    return handle(req, res)
+  })
+ 
+  server.listen(9000, (err) => {
+    if (err) throw err
+    console.log(' Ready on... ' , this, server.settings.env);
   })
 
   server.post('/saveUser', (req, res) => {
