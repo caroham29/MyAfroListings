@@ -23,7 +23,7 @@ export const updateFormService = async(obj) => {
 
 export const login = async({ email, password }) => {
   let resp = await axios.request({
-    method: 'POST',
+    method: 'GET',
       url: '/login',
       headers : {
         email,
